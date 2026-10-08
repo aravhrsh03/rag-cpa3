@@ -49,6 +49,8 @@ rag-cpa3/
 
 ## New in this version
 
+> A complete list of what changed, file by file, is in [`CHANGES.md`](CHANGES.md).
+
 ### 1. Persistent audit log
 Every call to `run_telecom_assistant()` (success **or** failure) is saved as one
 row in `data/audit_log.db` (`common/audit.py`):
