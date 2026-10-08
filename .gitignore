@@ -1,0 +1,7 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+data/telecom_ops.db
+data/vector_index/
+data/audit_log.db

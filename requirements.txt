@@ -1,0 +1,38 @@
+# Prodapt AI Operations Center - capstone dependencies
+python-dotenv>=1.0.0
+setuptools<81  # crewai 0.86.0's telemetry module still does `import pkg_resources`,
+               # which recent setuptools releases dropped
+
+# Orchestration
+langgraph>=0.2.60
+langchain-core>=0.3.21
+langchain-openai>=0.2.9
+langchain-anthropic>=0.3.0
+anthropic==0.125.0  # pinned: llama-index-llms-anthropic 0.12.2 (latest as of writing)
+                    # still calls Messages.create(temperature=...) in the pre-1.0 SDK
+                    # shape and breaks on anthropic>=1.0's changed signature; this is
+                    # the latest 0.x release and satisfies langchain-anthropic's own
+                    # `anthropic<2.0.0,>=0.120.0` constraint too.
+
+# LlamaIndex - document RAG + semantic SQL (retrieval/query engines only)
+llama-index-core>=0.11.23
+llama-index-llms-openai>=0.2.16
+llama-index-llms-anthropic>=0.3.0
+llama-index-embeddings-huggingface>=0.3.1
+sentence-transformers>=3.2.1
+transformers<4.49  # pinned to skip a long pip backtrack against crewai's older transformers ceiling
+sqlalchemy>=2.0.35
+
+# Google ADK - A2A agent services
+google-adk[a2a]>=0.3.0
+litellm==1.93.1  # pinned to a version with a prebuilt wheel (avoids a slow source build + backtrack)
+
+# CrewAI - customer communications crew
+# Pinned exactly: crewai's own dependency range (instructor/jiter/chromadb/textual)
+# makes pip's resolver backtrack for a very long time with an open-ended version.
+crewai==0.86.0
+crewai-tools==0.76.0  # pinned: the version pip's resolver always converges to anyway
+
+# UI
+streamlit>=1.39.0
+httpx>=0.27.2
